@@ -6,19 +6,23 @@ let player = 'X';
 let endGame = false;
 const msg = document.getElementById('msg');
 
+AImove();
+function changePlayer() {
+	if (player == 'X') {
+		player = 'O';
+	} else {
+		player = 'X';
+	}
+}
+
 function playerMove(doc) {
 	const valor = doc.textContent;
 	if (valor == String.fromCharCode(160) && endGame == false) {
 		doc.textContent = player;
 
 		checkBoard();
-
-		//trocar player
-		if (player == 'X') {
-			player = 'O';
-		} else {
-			player = 'X';
-		}
+		changePlayer();
+		AImove();
 
 	}
 }
@@ -37,6 +41,30 @@ function resetBoard() {
 			subelement.textContent = String.fromCharCode(160);
 		});
 	});
+}
+
+function AImove() {
+	let emptySlots = [];
+	let emptySlotSelected;
+
+	if(endGame == true){
+		return null;
+	}
+
+	try {
+		slotsArray.forEach((element) => {
+			element.forEach((subElement) => {
+				if (subElement.textContent == String.fromCharCode(160)) {
+					emptySlots[emptySlots.length] = subElement;
+				}
+			});
+		});
+
+		emptySlotSelected = emptySlots[Math.floor(Math.random() * emptySlots.length)];
+		emptySlotSelected.textContent = player;
+
+		changePlayer();
+	} catch { }
 }
 
 function checkBoard() {
