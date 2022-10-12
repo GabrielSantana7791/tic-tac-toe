@@ -1,0 +1,46 @@
+<div id="game">
+  <h1 align="center">Tic-Tac-Toe</h2>
+    <h2 id="msg"></h2>
+    <div>
+      <div>
+        <label>Select O</label>
+        <input onclick="playerSelect(this)" value="selectO" id="selectO" type="checkbox">
+      </div>
+      <div>
+        <label>Select X</label>
+        <input onclick="playerSelect(this)" value="selectX" id="selectX" type="checkbox" checked>
+      </div>
+      <div>
+        <label>Play alone</label>
+        <input onclick="activeAI()" value="playAlone" id="playAlone" type="checkbox">
+      </div>
+      <button onclick="beginGame()">Begin</button>
+    </div>
+
+
+    <button disabled id="reset" onclick="resetBoard()">
+      <p>Reset the game</p>
+    </button>
+
+    <table align="center" id="board">
+      <tr>
+        <td id="00" onclick="playerMove(this)" style="border-bottom: solid #000; border-right: solid #000;">&#160</td>
+        <td id="01" onclick="playerMove(this)" style="border-bottom: solid #000; border-right: solid #000;">&#160</td>
+        <td id="02" onclick="playerMove(this)" style="border-bottom: solid #000;">&#160</td>
+      </tr>
+      <tr>
+        <td id="10" onclick="playerMove(this)" style="border-bottom: solid #000; border-right: solid #000;">&#160</td>
+        <td id="11" onclick="playerMove(this)" style="border-bottom: solid #000; border-right: solid #000;">&#160</td>
+        <td id="12" onclick="playerMove(this)" style="border-bottom: solid #000">&#160</td>
+      </tr>
+      <tr>
+        <td id="20" onclick="playerMove(this)" style="border-right: solid #000;">&#160</td>
+        <td id="21" onclick="playerMove(this)" style="border-right: solid #000;">&#160</td>
+        <td id="22" onclick="playerMove(this)" style="">&#160</td>
+      </tr>
+    </table>
+
+    <link rel="stylesheet" href="css.css">
+    <script src="./js.js"></script>
+
+</div>
