@@ -1,12 +1,11 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <div id="lobby">
     <h1>Tic-Tac-Toee</h1>
     <div>
         <label>Nick:</label>
         <input id="playerName" type="text" value="Player Name">
     </div>
-
     <table>
-        
         <tr>
             <th>
                 <p>Room:</p>
@@ -18,31 +17,9 @@
         <tbody id="table_room"></tbody>
     </table>
 </div>
-
 <div id="game">
     <h1 align="center">Tic-Tac-Toe</h2>
-        <h2 id="msg"></h2>
-        <div>
-            <div>
-                <label>Select O</label>
-                <input onclick="playerSelect(this)" value="selectO" id="selectO" type="checkbox">
-            </div>
-            <div>
-                <label>Select X</label>
-                <input onclick="playerSelect(this)" value="selectX" id="selectX" type="checkbox" checked>
-            </div>
-            <div>
-                <label>Play alone</label>
-                <input onclick="activeAI()" value="playAlone" id="playAlone" type="checkbox">
-            </div>
-            <button onclick="beginGame()">Begin</button>
-        </div>
-
-
-        <button disabled id="reset" onclick="resetBoard()">
-            <p>Reset the game</p>
-        </button>
-
+        <h2 id="msg">oi</h2>
         <table align="center" id="board">
             <tr>
                 <td id="00" onclick="playerMove([0, 0])" style="border-bottom: solid #000; border-right: solid #000;">
@@ -64,18 +41,7 @@
                 <td id="22" onclick="playerMove([2, 2])" style="">&#160</td>
             </tr>
         </table>
-        <button onclick="mandar()">teste</button>
         <link rel="stylesheet" href="css.css">
-
 </div>
-
 <script src="/socket.io/socket.io.js"></script>
 <script src="app.js"></script>
-
-<script>
-function mandar(){
-    let room_player_move = {'roomId': 0, 'slotChanged': [2, 2]}
-    socket.emit('room_player_move', room_player_move);
-}
-
-</script>

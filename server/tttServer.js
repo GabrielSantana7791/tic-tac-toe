@@ -9,7 +9,7 @@ export default class TTTServer {
     this.app = express();
     this.httpServer = http.Server(this.app);
     this.socketServer = new Server(this.httpServer);
-    this.port = 3000;
+    this.port = 8080;
     this.room = [];
   }
 
