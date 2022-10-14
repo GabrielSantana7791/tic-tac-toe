@@ -35,4 +35,14 @@ export default class Room {
             }
         }
     }
+
+    playersName(){
+        let playersName = [];
+
+        this.players.forEach(element => {
+            playersName.push(element.name);
+        });
+        
+        return playersName;
+    }
 }

@@ -2,6 +2,7 @@ const table_room = document.getElementById('table_room');
 const div_ttt = document.getElementById('ttt');
 const div_lobby = document.getElementById('lobby');
 const div_game = document.getElementById('game');
+const table_game_players = document.getElementById('game_players');
 let playerName = document.getElementById('playerName');
 let roomId;
 
@@ -13,8 +14,8 @@ var socket = io();
 
 div_game.style.display = "none";
 
-function playerMove(slot){
-    let room_player_move = {'roomId': roomId, 'slotChanged': slot}
+function playerMove(slot) {
+    let room_player_move = { 'roomId': roomId, 'slotChanged': slot }
     socket.emit('room_player_move', room_player_move);
 }
 
@@ -41,17 +42,31 @@ socket.on('data_lobby', function (data) {
                 <p>${element.players.length}/2</p>
             </td>
             <td>
-                <button onClick="joinRoom(${element.id})">Join</button>
+                <button onClick="joinRoom(${element.id})" class="btn btn-secondary">Join</button>
             </td>
         </tr>`;
     });
 });
 
 socket.on('room_player_move', function (data) {
-    console.log(data)
-    for(let i=0; i<=2; i++){
-        for(let b=0; b<=2; b++){
-            slotsArray[i][b].textContent = data[i][b];
+    let board = data['game']
+    let players = data['players']
+    table_game_players.innerHTML = '';
+
+    for (let i = 0; i < players.length; i++) {
+        table_game_players.innerHTML += `<tr>
+            <td>
+                <p>${i}</p>
+            </td>
+            <td>
+                <p>${players[i]}</p>
+            </td>
+        </tr>`
+    }
+
+    for (let i = 0; i <= 2; i++) {
+        for (let b = 0; b <= 2; b++) {
+            slotsArray[i][b].textContent = board[i][b];
         }
     }
 });

@@ -1,47 +1,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<div id="lobby">
-    <h1>Tic-Tac-Toee</h1>
-    <div>
-        <label>Nick:</label>
-        <input id="playerName" type="text" value="Player Name">
+<div id="lobby" class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>Tic-Tac-Toee</h1>
+        </div>
     </div>
-    <table>
-        <tr>
-            <th>
-                <p>Room:</p>
-            </th>
-            <th>
-                <p>Players:</p>
-            </th>
-        </tr>
-        <tbody id="table_room"></tbody>
-    </table>
+    <div class="row">
+        <div class="col-4">
+            <label>Nick:</label>
+            <input id="playerName" class="form-control" type="text" placeholder="Nickname...">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Room:</p>
+                        </th>
+                        <th>
+                            <p>Players:</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table_room"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<div id="game">
-    <h1 align="center">Tic-Tac-Toe</h2>
-        <h2 id="msg">oi</h2>
-        <table align="center" id="board">
-            <tr>
-                <td id="00" onclick="playerMove([0, 0])" style="border-bottom: solid #000; border-right: solid #000;">
-                    &#160</td>
-                <td id="01" onclick="playerMove([0, 1])" style="border-bottom: solid #000; border-right: solid #000;">
-                    &#160</td>
-                <td id="02" onclick="playerMove([0, 2])" style="border-bottom: solid #000;">&#160</td>
-            </tr>
-            <tr>
-                <td id="10" onclick="playerMove([1, 0])" style="border-bottom: solid #000; border-right: solid #000;">
-                    &#160</td>
-                <td id="11" onclick="playerMove([1, 1])" style="border-bottom: solid #000; border-right: solid #000;">
-                    &#160</td>
-                <td id="12" onclick="playerMove([1, 2])" style="border-bottom: solid #000">&#160</td>
-            </tr>
-            <tr>
-                <td id="20" onclick="playerMove([2, 0])" style="border-right: solid #000;">&#160</td>
-                <td id="21" onclick="playerMove([2, 1])" style="border-right: solid #000;">&#160</td>
-                <td id="22" onclick="playerMove([2, 2])" style="">&#160</td>
-            </tr>
-        </table>
-        <link rel="stylesheet" href="css.css">
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="app.js"></script>
+<div id="game" class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 align="center">Tic-Tac-Toe</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div id="menu" class="col-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><label>Id</label></th>
+                        <th><label>Player</label></th>
+                    </tr>
+                </thead>
+                <tbody id="game_players">
+                    <tr>
+                        <td><label>id</label></td>
+                        <td><label>Username</label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-auto">
+            <table align="center" id="board" class="table">
+                <tr>
+                    <td id="00" onclick="playerMove([0, 0])"
+                        style="border-bottom: solid #000; border-right: solid #000;">
+                        &#160</td>
+                    <td id="01" onclick="playerMove([0, 1])"
+                        style="border-bottom: solid #000; border-right: solid #000;">
+                        &#160</td>
+                    <td id="02" onclick="playerMove([0, 2])" style="border-bottom: solid #000;">&#160</td>
+                </tr>
+                <tr>
+                    <td id="10" onclick="playerMove([1, 0])"
+                        style="border-bottom: solid #000; border-right: solid #000;">
+                        &#160</td>
+                    <td id="11" onclick="playerMove([1, 1])"
+                        style="border-bottom: solid #000; border-right: solid #000;">
+                        &#160</td>
+                    <td id="12" onclick="playerMove([1, 2])" style="border-bottom: solid #000">&#160</td>
+                </tr>
+                <tr>
+                    <td id="20" onclick="playerMove([2, 0])" style="border-right: solid #000;">&#160</td>
+                    <td id="21" onclick="playerMove([2, 1])" style="border-right: solid #000;">&#160</td>
+                    <td id="22" onclick="playerMove([2, 2])" style="">&#160</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="css.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
