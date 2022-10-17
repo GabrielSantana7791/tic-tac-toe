@@ -1,6 +1,10 @@
+import { tttServer } from "../../js.js";
 import Player from "../../etc/player.js";
 
-export default function run(socketServer, socket, msg, room) {
+export default function run(socket, msg) {
+    let socketServer = tttServer.socketServer;
+    let room = tttServer.room;
+
     socket.join(`room_${msg['room']}`);
 
     let player = new Player(msg['playerName'], socket.id);

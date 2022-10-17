@@ -14,15 +14,15 @@ export default class SocketController {
       socket.emit('data_lobby', this.room);
 
       socket.on('join_room', msg => {
-        joinRoom(this.socketServer, socket, msg, this.room);
+        joinRoom(socket, msg);
       });
 
       socket.on('disconnect', () => {
-        disconnect(this.room, socket, this.socketServer);
+        disconnect(socket);
       })
 
       socket.on('room_player_move', msg => {
-        roomPlayerMove(this.socketServer, socket, msg, this.room);
+        roomPlayerMove(socket, msg);
       })
     });
   }
