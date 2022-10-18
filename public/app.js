@@ -16,12 +16,18 @@ div_game.style.display = "none";
 
 function playerMove(slot) {
     let room_player_move = { 'roomId': roomId, 'slotChanged': slot }
+
     socket.emit('room_player_move', room_player_move);
 }
 
 function joinRoom(number) {
     roomId = number;
-    const data = { 'playerName': playerName.value, 'room': number };
+    if(playerName.value == ''){
+        alert('You must select a nickname')
+        
+        return null;
+    }
+    const data = { 'playerName': playerName.value, 'room': roomId };
     socket.emit('join_room', data);
 
     div_game.style.display = "";
@@ -31,28 +37,28 @@ function joinRoom(number) {
 socket.on('data_lobby', function (data) {
     table_room.innerHTML = null;
 
-    data.forEach(element => {
+    for(let i=0; i < data.length; i++){
         table_room.innerHTML += `
         <tr>
             <td>
-                <p>${element.id}</p>
+                <p>${i}</p>
             </td>
       
             <td>
-                <p>${element.players.length}/2</p>
+                <p>${data[i]}/2</p>
             </td>
             <td>
-                <button onClick="joinRoom(${element.id})" class="btn btn-secondary">Join</button>
+                <button onClick="joinRoom(${i})" class="btn btn-secondary">Join</button>
             </td>
         </tr>`;
-    });
+    }
 });
 
 socket.on('room_player_move', function (data) {
     let board = data['game']
     let players = data['players']
-    table_game_players.innerHTML = '';
-
+    table_game_players.innerHTML = '';  
+    
     for (let i = 0; i < players.length; i++) {
         table_game_players.innerHTML += `<tr>
             <td>
@@ -60,6 +66,9 @@ socket.on('room_player_move', function (data) {
             </td>
             <td>
                 <p>${players[i]}</p>
+            </td>
+            <td>
+                <p id="player_score_${i}">${data['score'][i]}</p>
             </td>
         </tr>`
     }

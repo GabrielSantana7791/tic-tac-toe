@@ -1,13 +1,20 @@
 import { tttServer } from "../../js.js";
 
 export default function run(socket) {
-    let socketServer = tttServer.socketServer;
-    let room = tttServer.room;
+    let socketServer = tttServer.getSocketServer();
+    let room = tttServer.getRoom();
 
     for (let i = 0; i < room.length; i++) {
         room[i].rmvPlayer(socket.id);
-        let dataToSend = {'game': room[i].game.slotsArray, 'players': room[i].playersName()};
+        let dataToSend = {'game': room[i].getGame().getSlotsArray(), 'players': room[i].getPlayersName(),
+        'score': room[i].getScore()};
         socketServer.to(`room_${i}`).emit('room_player_move', dataToSend)
     }
-    socketServer.emit('data_lobby', room);
+
+   let dataToSend = [];
+      
+    for(let i=0; i < room.length; i++){
+      dataToSend.push(room[i].getPlayers().length);
+    }
+    socketServer.emit('data_lobby', dataToSend);
 }
