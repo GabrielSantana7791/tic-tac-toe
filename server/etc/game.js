@@ -1,3 +1,5 @@
+import { tttServer } from "../js.js";
+
 export default class Game {
 	#emptyText;
 	#slotsArray;
@@ -6,6 +8,7 @@ export default class Game {
 	#playerTurn;
 	#endGame;
 	#room;
+	#serverSocket = tttServer.getSocketServer();
 
 	constructor() {
 		this.#emptyText = String.fromCharCode(160);
@@ -16,6 +19,14 @@ export default class Game {
 		this.#endGame = true;
 
 		this.resetBoard();
+	}
+
+	getPlayerTurnMessage(){
+		if(this.#endGame == false){
+			return `${this.#playerTurn['roomObj'].getName()}'s Turn`;
+		}
+
+		return 'Waiting a new player'
 	}
 
 	resetBoard() {
@@ -66,8 +77,14 @@ export default class Game {
 	}
 
 	checkBoard() {
+		let slotsUnempty = 0;
+		
 		for (let i = 0; i <= 2; i++) {
 			for (let b = 0; b <= 2; b++) {
+				if(this.#slotsArray[i][b] != null && this.#slotsArray[i][b] != this.#emptyText){
+					slotsUnempty ++;
+				}
+
 				if (this.#slotsArray[i][b] == this.#playerTurn['mark']) {
 					try {
 						//diagonal  >>>
@@ -107,6 +124,10 @@ export default class Game {
 					} catch { }
 				}
 			}
+		}
+
+		if(slotsUnempty >= 9){
+			this.resetBoard();
 		}
 	}
 

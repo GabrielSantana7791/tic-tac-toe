@@ -11,7 +11,7 @@ export default function run(socket, msg) {
     room[msg['room']].addPlayer(player);
 
     let dataToSend = {'game': room[msg['room']].getGame().getSlotsArray(), 'players': room[msg['room']].getPlayersName(),
-    'score': room[msg['room']].getScore()};
+    'score': room[msg['room']].getScore(), 'player_turn': room[msg['room']].getGame().getPlayerTurnMessage()};
     
     socket.emit('room_player_move', dataToSend)
     socketServer.to(`room_${msg['room']}`).emit("room_player_move", dataToSend)

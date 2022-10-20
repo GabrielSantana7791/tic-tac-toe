@@ -4,6 +4,7 @@ const div_lobby = document.getElementById('lobby');
 const div_game = document.getElementById('game');
 const table_game_players = document.getElementById('game_players');
 let playerName = document.getElementById('playerName');
+let h3_player_turn = document.getElementById('player_turn');
 let roomId;
 
 let slotsArray = [[document.getElementById('00'), document.getElementById('01'), document.getElementById('02')],
@@ -58,12 +59,13 @@ socket.on('room_player_move', function (data) {
     let board = data['game']
     let players = data['players']
     table_game_players.innerHTML = '';  
+
+    if(data['player_turn']){
+        h3_player_turn.innerHTML = data['player_turn'];
+    }  
     
     for (let i = 0; i < players.length; i++) {
         table_game_players.innerHTML += `<tr>
-            <td>
-                <p>${i}</p>
-            </td>
             <td>
                 <p>${players[i]}</p>
             </td>

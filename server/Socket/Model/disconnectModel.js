@@ -7,7 +7,7 @@ export default function run(socket) {
     for (let i = 0; i < room.length; i++) {
         room[i].rmvPlayer(socket.id);
         let dataToSend = {'game': room[i].getGame().getSlotsArray(), 'players': room[i].getPlayersName(),
-        'score': room[i].getScore()};
+        'score': room[i].getScore(), 'player_turn': room[i].getGame().getPlayerTurnMessage()};
         socketServer.to(`room_${i}`).emit('room_player_move', dataToSend)
     }
 
